@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f7f7"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:maxLength="45"
+            android:hint="nome da conta"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:inputType="number"
+            android:hint="código de barras"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:textColor="@color/orangish"
+            android:background="#ffffff"
+            android:text="@string/btn_ler_codigo_de_barras_pela_cam"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_date_picker_schedule_payment"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="DATA:" />
+
+            <EditText
+                android:id="@+id/editText_schedule_payment_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:maxLength="10"
+                android:inputType="number"
+                android:hint="DD/MM/YYYY" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_time_picker_schedule_payment"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="HORÁRIO:" />
+
+        <EditText
+            android:id="@+id/editText_schedule_payment_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:maxLength="5"
+            android:inputType="number"
+            android:hint="00:00" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:background="#ffffff"
+            android:textColor="@color/orangish"
+            android:text="@string/btn_agendar_pagamento"
+            android:layout_marginBottom="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

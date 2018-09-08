@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">CardManager</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_registration">Solicitar Cadastro</string>
+    <string name="title_activity_home">Card Manager</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="solicitar_cadastro">Solicitar Cadastro</string>
+    <string name="email">Email</string>
+    <string name="e_mail">e-mail</string>
+    <string name="entrar">Entrar</string>
+    <string name="senha">Senha</string>
+    <string name="nome">nome</string>
+    <string name="numero_do_cartao">número do cartão</string>
+    <string name="btn_ler_cartao_pela_camera">LER CARTÃO PELA CÂMERA</string>
+    <string name="terms_accept">li e concordo com os termos de uso</string>
+    <string name="data_de_vencimento">Data de vencimento</string>
+    <string name="dueDate">11/10/2018</string>
+    <string name="limite_disponivel">Limite disponível</string>
+    <string name="show_limit_available">R$ 2.000.00</string>
+    <string name="open_invoice_value">Valor da fatura em aberto</string>
+    <string name="title_activity_navigation_drawer_fragment">NavigationDrawerFragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Daniela Ferraz</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_drawer_menu">DrawerMenuActivity</string>
+    <string name="btn_ler_codigo_de_barras_pela_cam">LER CÓDIGO PELA CÂMERA</string>
+    <string name="btn_agendar_pagamento">AGENDAR</string>
+    <string name="string_about_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt</string>
+</resources>

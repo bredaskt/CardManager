@@ -1,0 +1,7 @@
+
+esquid:MaximumInheritanceDepth!"<This class has 7 parents which is greater than 5 authorized.(º´
+•squid:UselessImportCheck"lRemove this unused import 'com.example.bbreda.cardmanager.data.repository.local.login.LoginLocalRepository'.(™ ®Âûÿÿÿÿ
+Rsquid:S19053"/Remove this unnecessary cast to "DrawerLayout".(ÐÍè¨þÿÿÿÿ8çÀ’µÛ,
+Tsquid:S19057"1Remove this unnecessary cast to "NavigationView".(üûÍøÿÿÿÿ8çÀ’µÛ,
+Rsquid:S1905k"/Remove this unnecessary cast to "DrawerLayout".(ÐÍè¨þÿÿÿÿ8çÀ’µÛ,
+Rsquid:S1905t"/Remove this unnecessary cast to "DrawerLayout".(ÐÍè¨þÿÿÿÿ8çÀ’µÛ,
