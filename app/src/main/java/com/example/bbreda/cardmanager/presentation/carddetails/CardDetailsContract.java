@@ -15,6 +15,9 @@ public interface CardDetailsContract {
 
         void showCardDetails(List<CardDetailsWrapper> extractList);
 
+        void showLoading();
+
+        void hideLoading();
     }
 
     interface Presenter extends BasePresenter {
