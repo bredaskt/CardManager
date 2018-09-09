@@ -1,7 +1,10 @@
 package com.example.bbreda.cardmanager.presentation.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,6 +37,8 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @BindView(R.id.et_senha)
     EditText mPassword;
 
+    ProgressDialog progressDoalog;
+
     private LoginContract.Presenter mPresenter;
 
     public static LoginFragment newInstance() {
@@ -50,7 +55,9 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         @Override
         public void onClick(View v) {
             mPresenter.onButtonClickLogin(mEmail.getText().toString(), mPassword.getText().toString());
-        }
+            showLoading();
+        };
+
     };
 
     // clique do botao (listener) para abrir a tela apos clicar em solicitar cadastro
@@ -86,12 +93,53 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void showMessageErrorFilledFormLoginGeneric() {
-        Toast.makeText(getContext(), "Login inválido! Verifique os dados e tente novamente!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.string_fields_error_login, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showMessageNetworkError() {
-        Toast.makeText(getContext(), "Você está sem conexão com a Internet! Verifique e tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.string_network_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading() {
+            progressDoalog = new ProgressDialog(getViewContext());
+            progressDoalog.setMax(100);
+            progressDoalog.setMessage("Verificando seus dados de acesso, aguarde por favor...");
+            progressDoalog.setTitle("CardManager");
+            progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDoalog.show();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
+                            Thread.sleep(200);
+                            handle.sendMessage(handle.obtainMessage());
+                            if (progressDoalog.getProgress() == progressDoalog.getMax()) {
+                                hideLoading();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+        Handler handle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                progressDoalog.incrementProgressBy(15);
+            };
+    };
+
+
+    @Override
+    public void hideLoading() {
+        progressDoalog.dismiss();
     }
 
     @Override
