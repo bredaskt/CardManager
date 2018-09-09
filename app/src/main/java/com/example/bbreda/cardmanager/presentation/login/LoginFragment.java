@@ -37,8 +37,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @BindView(R.id.et_senha)
     EditText mPassword;
 
-    @BindView(R.id.progress_dialog_login)
-    ProgressDialog mProgressDialog;
+    ProgressDialog progressDoalog;
 
     private LoginContract.Presenter mPresenter;
 
@@ -53,23 +52,27 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     // clique do botao (listener) para abrir a tela apos clicar em login
     private View.OnClickListener mButtonLoginListener = new View.OnClickListener() {
+
         @Override
         public void onClick(View v) {
-            mProgressDialog = new ProgressDialog(getView().getContext());
-            mProgressDialog.setMax(100);
-            mProgressDialog.setMessage("Its loading....");
-            mProgressDialog.setTitle("ProgressDialog bar example");
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.show();
+            mPresenter.onButtonClickLogin(mEmail.getText().toString(), mPassword.getText().toString());
+            progressDoalog = new ProgressDialog(getViewContext());
+            progressDoalog.setMax(100);
+            progressDoalog.setMessage("Verificando seus dados de acesso, aguarde por favor...");
+            progressDoalog.setTitle("CardManager");
+            progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDoalog.show();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        while (mProgressDialog.getProgress() <= mProgressDialog.getMax()) {
+                        while (progressDoalog.getProgress() <= progressDoalog
+                                .getMax()) {
                             Thread.sleep(200);
                             handle.sendMessage(handle.obtainMessage());
-                            if (mProgressDialog.getProgress() == mProgressDialog.getMax()) {
-                                mProgressDialog.dismiss();
+                            if (progressDoalog.getProgress() == progressDoalog
+                                    .getMax()) {
+                                progressDoalog.dismiss();
                             }
                         }
                     } catch (Exception e) {
@@ -83,7 +86,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                mProgressDialog.incrementProgressBy(1);
+                progressDoalog.incrementProgressBy(45);
             }
         };
 
