@@ -11,15 +11,9 @@ public interface HomeContract {
 
         void showCardData(Card card);
 
-        void showLoading();
-
-        void hideLoading();
-
     }
 
     interface Presenter extends BasePresenter {
-
-
 
     }
 
