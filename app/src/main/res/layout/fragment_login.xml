@@ -30,7 +30,6 @@
             android:inputType="textEmailAddress"
             android:textColor="#ffffff"
             android:hint="@string/email"
-            android:text="wp@gmail.com"
             android:textColorHint="#ffffff" />
 
         <EditText
@@ -47,7 +46,6 @@
             android:text="123456"
             android:inputType="textPassword"
             android:textColor="#ffffff"
-            android:hint="@string/senha"
             android:textColorHint="#ffffff" />
 
         <Button

@@ -29,4 +29,6 @@
     <string name="btn_ler_codigo_de_barras_pela_cam">LER CÓDIGO PELA CÂMERA</string>
     <string name="btn_agendar_pagamento">AGENDAR</string>
     <string name="string_about_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna wirl aliqua. Up exlaborum incididunt</string>
+    <string name="string_network_error">Login inválido! Verifique os dados e tente novamente!</string>
+    <string name="string_fields_error_login">Login inválido! Verifique os dados e tente novamente!</string>
 </resources>
