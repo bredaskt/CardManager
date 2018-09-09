@@ -72,6 +72,12 @@
             android:text="@string/solicitar_cadastro"
             android:textColor="#ffffff" />
 
+        <ProgressBar
+            android:id="@+id/progress_dialog_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 

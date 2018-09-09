@@ -1,7 +1,10 @@
 package com.example.bbreda.cardmanager.presentation.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,6 +37,9 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @BindView(R.id.et_senha)
     EditText mPassword;
 
+    @BindView(R.id.progress_dialog_login)
+    ProgressDialog mProgressDialog;
+
     private LoginContract.Presenter mPresenter;
 
     public static LoginFragment newInstance() {
@@ -49,8 +55,38 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     private View.OnClickListener mButtonLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mPresenter.onButtonClickLogin(mEmail.getText().toString(), mPassword.getText().toString());
+            mProgressDialog = new ProgressDialog(getView().getContext());
+            mProgressDialog.setMax(100);
+            mProgressDialog.setMessage("Its loading....");
+            mProgressDialog.setTitle("ProgressDialog bar example");
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.show();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (mProgressDialog.getProgress() <= mProgressDialog.getMax()) {
+                            Thread.sleep(200);
+                            handle.sendMessage(handle.obtainMessage());
+                            if (mProgressDialog.getProgress() == mProgressDialog.getMax()) {
+                                mProgressDialog.dismiss();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
         }
+
+        Handler handle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                mProgressDialog.incrementProgressBy(1);
+            }
+        };
+
     };
 
     // clique do botao (listener) para abrir a tela apos clicar em solicitar cadastro
