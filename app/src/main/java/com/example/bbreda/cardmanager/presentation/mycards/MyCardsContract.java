@@ -14,6 +14,10 @@ public interface MyCardsContract {
 
         void goToHomeScreen();
 
+        void showLoading();
+
+        void hideLoading();
+
     }
 
     interface Presenter extends BasePresenter {
