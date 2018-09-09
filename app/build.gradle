@@ -43,5 +43,7 @@ dependencies {
     implementation 'com.squareup.okhttp:okhttp:2.5.0'
     apply plugin: 'checkstyle'
     check.dependsOn 'checkstyle'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
 
 }

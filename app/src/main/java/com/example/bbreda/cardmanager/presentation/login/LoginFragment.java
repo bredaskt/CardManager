@@ -86,12 +86,12 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void showMessageErrorFilledFormLoginGeneric() {
-        Toast.makeText(getContext(), "Login inválido! Verifique os dados e tente novamente!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.string_fields_error_login, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showMessageNetworkError() {
-        Toast.makeText(getContext(), "Você está sem conexão com a Internet! Verifique e tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.string_network_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

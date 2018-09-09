@@ -23,4 +23,6 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.bbreda.cardmanager", appContext.getPackageName());
     }
+
+
 }
