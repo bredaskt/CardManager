@@ -52,42 +52,10 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     // clique do botao (listener) para abrir a tela apos clicar em login
     private View.OnClickListener mButtonLoginListener = new View.OnClickListener() {
-
         @Override
         public void onClick(View v) {
             mPresenter.onButtonClickLogin(mEmail.getText().toString(), mPassword.getText().toString());
-            progressDoalog = new ProgressDialog(getViewContext());
-            progressDoalog.setMax(100);
-            progressDoalog.setMessage("Verificando seus dados de acesso, aguarde por favor...");
-            progressDoalog.setTitle("CardManager");
-            progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDoalog.show();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        while (progressDoalog.getProgress() <= progressDoalog
-                                .getMax()) {
-                            Thread.sleep(200);
-                            handle.sendMessage(handle.obtainMessage());
-                            if (progressDoalog.getProgress() == progressDoalog
-                                    .getMax()) {
-                                progressDoalog.dismiss();
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
-
-        Handler handle = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                progressDoalog.incrementProgressBy(45);
-            }
+            showLoading();
         };
 
     };
@@ -131,6 +99,47 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void showMessageNetworkError() {
         Toast.makeText(getContext(), R.string.string_network_error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading() {
+            progressDoalog = new ProgressDialog(getViewContext());
+            progressDoalog.setMax(100);
+            progressDoalog.setMessage("Verificando seus dados de acesso, aguarde por favor...");
+            progressDoalog.setTitle("CardManager");
+            progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDoalog.show();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
+                            Thread.sleep(200);
+                            handle.sendMessage(handle.obtainMessage());
+                            if (progressDoalog.getProgress() == progressDoalog.getMax()) {
+                                hideLoading();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+        Handler handle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                progressDoalog.incrementProgressBy(15);
+            };
+    };
+
+
+    @Override
+    public void hideLoading() {
+        progressDoalog.dismiss();
     }
 
     @Override

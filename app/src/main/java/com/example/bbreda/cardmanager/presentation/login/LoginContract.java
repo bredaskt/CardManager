@@ -15,6 +15,10 @@ public interface LoginContract {
 
         void showMessageNetworkError();
 
+        void showLoading();
+
+        void hideLoading();
+
     }
 
     interface Presenter extends BasePresenter {

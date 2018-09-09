@@ -53,14 +53,6 @@ public class LoginPresenter implements LoginContract.Presenter {
         }
     };
 
-    private boolean checkNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) mView.getViewContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        NetworkInfo mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-        return (wifi.isAvailable() && wifi.isConnectedOrConnecting() || (mobile.isAvailable() && mobile.isConnectedOrConnecting()));
-    }
-
     @Override
     public void onButtonClickLogin(String email, String password) {
         if (!checkNetworkAvailable()) {
@@ -72,6 +64,14 @@ public class LoginPresenter implements LoginContract.Presenter {
                 mLoginBusiness.doLogin(new LoginRequest(email, password), loginOperationListener);
             }
         }
+    }
+
+    private boolean checkNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mView.getViewContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        return (wifi.isAvailable() && wifi.isConnectedOrConnecting() || (mobile.isAvailable() && mobile.isConnectedOrConnecting()));
     }
 
     private boolean validateFilledFormLogin(String email, String password) {
