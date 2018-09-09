@@ -1,6 +1,9 @@
 package com.example.bbreda.cardmanager.presentation.carddetails;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +26,8 @@ public class CardDetailsFragment extends Fragment implements  CardDetailsContrac
 
     @BindView(R.id.recycler_view_card_details)
     RecyclerView mCardDetails;
+
+    private ProgressDialog progressDoalog;
 
     private CardDetailsContract.Presenter mPresenter;
 
@@ -60,7 +65,50 @@ public class CardDetailsFragment extends Fragment implements  CardDetailsContrac
     }
 
     @Override
+    public void showLoading() {
+        progressDoalog = new ProgressDialog(getViewContext());
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Buscando os dados de extrato de seu cartão...");
+        progressDoalog.setTitle("CardManager");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDoalog.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
+                        Thread.sleep(200);
+                        handle.sendMessage(handle.obtainMessage());
+                        if (progressDoalog.getProgress() == progressDoalog.getMax()) {
+                            hideLoading();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    Handler handle = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            progressDoalog.incrementProgressBy(15);
+        };
+    };
+
+    @Override
+    public void hideLoading() {
+        progressDoalog.dismiss();
+    }
+
+
+
+    @Override
     public void onStart() {
+        showLoading();
         super.onStart();
         mPresenter.start();
 
