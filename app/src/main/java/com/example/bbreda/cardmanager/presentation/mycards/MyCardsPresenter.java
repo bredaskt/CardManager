@@ -36,7 +36,6 @@ public class MyCardsPresenter implements MyCardsContract.Presenter {
 
         @Override
         public void onOperationSuccess(Boolean resultStatus) {
-
             if (resultStatus) {
                 mView.goToHomeScreen();
             }

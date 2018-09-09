@@ -3,7 +3,6 @@ package com.example.bbreda.cardmanager.presentation.mycards;
 import com.example.bbreda.cardmanager.data.model.Card;
 import com.example.bbreda.cardmanager.presentation.BasePresenter;
 import com.example.bbreda.cardmanager.presentation.BaseView;
-
 import java.util.List;
 
 public interface MyCardsContract {
@@ -13,6 +12,10 @@ public interface MyCardsContract {
         void showCards(List<Card> cardList);
 
         void goToHomeScreen();
+
+        void showLoading();
+
+        void hideLoading();
 
     }
 
