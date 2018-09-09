@@ -1,7 +1,5 @@
 package com.example.bbreda.cardmanager.presentation.home;
 
-import android.content.Context;
-
 import com.example.bbreda.cardmanager.data.model.Card;
 import com.example.bbreda.cardmanager.presentation.BasePresenter;
 import com.example.bbreda.cardmanager.presentation.BaseView;
@@ -13,7 +11,9 @@ public interface HomeContract {
 
         void showCardData(Card card);
 
+        void showLoading();
 
+        void hideLoading();
 
     }
 
