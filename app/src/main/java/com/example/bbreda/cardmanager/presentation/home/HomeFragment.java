@@ -69,10 +69,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     @Override
     public void onStart() {
-        showLoading();
         super.onStart();
         mPresenter.start();
-
     }
 
     @Override
@@ -84,44 +82,4 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     }
 
-    @Override
-    public void showLoading() {
-        progressDoalog = new ProgressDialog(getViewContext());
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Buscando os dados de seu cartão...");
-        progressDoalog.setTitle("CardManager");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDoalog.show();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
-                        Thread.sleep(200);
-                        handle.sendMessage(handle.obtainMessage());
-                        if (progressDoalog.getProgress() == progressDoalog.getMax()) {
-                            hideLoading();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    Handler handle = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            progressDoalog.incrementProgressBy(15);
-        };
-    };
-
-
-    @Override
-    public void hideLoading() {
-        progressDoalog.dismiss();
-    }
 }
