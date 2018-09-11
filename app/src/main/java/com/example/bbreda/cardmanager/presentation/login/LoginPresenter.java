@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
+import com.example.bbreda.cardmanager.R;
 import com.example.bbreda.cardmanager.business.LoginBusiness;
 import com.example.bbreda.cardmanager.data.ApiManager;
 import com.example.bbreda.cardmanager.data.model.LoginRequest;
@@ -34,7 +35,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         @Override
         public void onOperationError(LoginResponse loginResponse) {
-            Toast.makeText(mView.getViewContext(), "Algo deu errado no Login!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mView.getViewContext(), R.string.string_algo_deu_errado_login, Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -58,10 +59,14 @@ public class LoginPresenter implements LoginContract.Presenter {
         if (!checkNetworkAvailable()) {
             mView.showMessageNetworkError();
         } else {
-            if (!validateFilledFormLogin(email, password)) {
+            if (!validateEmptyLogin(email)) {
                 mView.showMessageErrorFilledFormLoginGeneric();
             } else {
-                mLoginBusiness.doLogin(new LoginRequest(email, password), loginOperationListener);
+                if (!validateEmptyPassword(password)) {
+                    mView.showMessageErrorFilledFormPasswordGeneric();
+                } else {
+                    mLoginBusiness.doLogin(new LoginRequest(email, password), loginOperationListener);
+                }
             }
         }
     }
@@ -74,14 +79,42 @@ public class LoginPresenter implements LoginContract.Presenter {
         return (wifi.isAvailable() && wifi.isConnectedOrConnecting() || (mobile.isAvailable() && mobile.isConnectedOrConnecting()));
     }
 
-    private boolean validateFilledFormLogin(String email, String password) {
-        if ((email.isEmpty()) || (password.isEmpty())) {
+//    private boolean validateEmptyLogin(String email, String password) {
+//        if ((email.isEmpty()) || (password.isEmpty())) {
+//            mView.showMessageErrorFilledFormLoginGeneric();
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+
+//    private boolean validateEmptyLogin(String email, String password) {
+//        if ((email.isEmpty()) || (password.isEmpty())) {
+//            mView.showMessageErrorFilledFormLoginGeneric();
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
+
+    private boolean validateEmptyLogin(String email) {
+        if (email.isEmpty()) {
             mView.showMessageErrorFilledFormLoginGeneric();
             return false;
         } else {
             return true;
         }
     }
+
+    private boolean validateEmptyPassword (String password){
+        if (password.isEmpty()) {
+            mView.showMessageErrorFilledFormLoginGeneric();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     @Override
     public void onButtonClickToRegistrationScreen() {

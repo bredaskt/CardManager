@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         @Override
         public void onClick(View v) {
             mPresenter.onButtonClickLogin(mEmail.getText().toString(), mPassword.getText().toString());
-            showLoading();
+            //showLoading();
         };
 
     };
@@ -103,39 +103,44 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
 
     @Override
-    public void showLoading() {
-            progressDoalog = new ProgressDialog(getViewContext());
-            progressDoalog.setMax(100);
-            progressDoalog.setMessage("Verificando seus dados de acesso, aguarde por favor...");
-            progressDoalog.setTitle("CardManager");
-            progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDoalog.show();
+    public void showMessageErrorFilledFormPasswordGeneric() {
+        Toast.makeText(getContext(), R.string.string_error_password, Toast.LENGTH_SHORT).show();
+    }
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
-                            Thread.sleep(200);
-                            handle.sendMessage(handle.obtainMessage());
-                            if (progressDoalog.getProgress() == progressDoalog.getMax()) {
-                                hideLoading();
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+    @Override
+    public void showLoading() {
+        progressDoalog = new ProgressDialog(getViewContext());
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Verificando seus dados de acesso, aguarde por favor...");
+        progressDoalog.setTitle("CardManager");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDoalog.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            try {
+                while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
+                    Thread.sleep(200);
+                    handle.sendMessage(handle.obtainMessage());
+                    if (progressDoalog.getProgress() == progressDoalog.getMax()) {
+                        hideLoading();
                     }
                 }
-            }).start();
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            }
+        }).start();
+    }
 
-        Handler handle = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                progressDoalog.incrementProgressBy(15);
-            };
-    };
+    Handler handle = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            progressDoalog.incrementProgressBy(15);
+        };
+};
 
 
     @Override

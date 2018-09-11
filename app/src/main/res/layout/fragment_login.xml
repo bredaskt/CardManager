@@ -28,9 +28,10 @@
             android:maxLength="100"
             android:maxLines="1"
             android:inputType="textEmailAddress"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:hint="@string/email"
-            android:textColorHint="#ffffff" />
+            android:text="wp@gmail.com"
+            android:textColorHint="@color/colorWhite" />
 
         <EditText
             android:id="@+id/et_senha"
@@ -44,8 +45,9 @@
             android:maxLength="6"
             android:maxLines="1"
             android:inputType="textPassword"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff" />
+            android:textColor="@color/colorWhite"
+            android:text="123456"
+            android:textColorHint="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_login"
@@ -57,7 +59,7 @@
             android:background="#3a4f4e4d"
             android:elevation="30dp"
             android:text="@string/entrar"
-            android:textColor="#ffffff" />
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_registration"
@@ -69,7 +71,7 @@
             android:background="#3a4f4e4d"
             android:elevation="30dp"
             android:text="@string/solicitar_cadastro"
-            android:textColor="#ffffff" />
+            android:textColor="@color/colorWhite" />
 
         <ProgressBar
             android:id="@+id/progress_bar_login"

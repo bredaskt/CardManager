@@ -7,18 +7,14 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.bbreda.cardmanager.R;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,8 +23,7 @@ public class CardDetailsFragment extends Fragment implements  CardDetailsContrac
     @BindView(R.id.recycler_view_card_details)
     RecyclerView mCardDetails;
 
-    private ProgressDialog progressDoalog;
-
+    private ProgressDialog mProgress;
     private CardDetailsContract.Presenter mPresenter;
 
     @Nullable
@@ -39,11 +34,12 @@ public class CardDetailsFragment extends Fragment implements  CardDetailsContrac
         ButterKnife.bind(this, view);
 
         return view;
-
     }
 
     @Override
-    public void setPresenter(CardDetailsContract.Presenter presenter) { mPresenter = presenter; }
+    public void setPresenter(CardDetailsContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
 
     @Override
     public Context getViewContext() {
@@ -56,37 +52,34 @@ public class CardDetailsFragment extends Fragment implements  CardDetailsContrac
 
     @Override
     public void showCardDetails(List<CardDetailsWrapper> cardDetailsWrapperList) {
-
         CardDetailsAdapter mCardDetailsAdapter = new CardDetailsAdapter(cardDetailsWrapperList);
-
         mCardDetails.setAdapter(mCardDetailsAdapter);
         mCardDetails.setLayoutManager(new LinearLayoutManager(getContext()));
-
     }
 
     @Override
     public void showLoading() {
-        progressDoalog = new ProgressDialog(getViewContext());
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Buscando os dados de extrato de seu cartão...");
-        progressDoalog.setTitle("CardManager");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDoalog.show();
+        mProgress = new ProgressDialog(getViewContext());
+        mProgress.setMax(100);
+        mProgress.setMessage("Buscando os dados de extrato de seu cartão...");
+        mProgress.setTitle("CardManager");
+        mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgress.show();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
-                        Thread.sleep(200);
-                        handle.sendMessage(handle.obtainMessage());
-                        if (progressDoalog.getProgress() == progressDoalog.getMax()) {
-                            hideLoading();
-                        }
+            try {
+                while (mProgress.getProgress() <= mProgress.getMax()) {
+                    Thread.sleep(200);
+                    handle.sendMessage(handle.obtainMessage());
+                    if (mProgress.getProgress() == mProgress.getMax()) {
+                        hideLoading();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             }
         }).start();
     }
@@ -95,23 +88,19 @@ public class CardDetailsFragment extends Fragment implements  CardDetailsContrac
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            progressDoalog.incrementProgressBy(15);
+            mProgress.incrementProgressBy(15);
         };
     };
 
     @Override
     public void hideLoading() {
-        progressDoalog.dismiss();
+        mProgress.dismiss();
     }
-
-
 
     @Override
     public void onStart() {
         showLoading();
         super.onStart();
         mPresenter.start();
-
     }
-
 }

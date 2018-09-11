@@ -14,11 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.bbreda.cardmanager.R;
 import com.example.bbreda.cardmanager.data.model.Card;
-import com.example.bbreda.cardmanager.presentation.baselogged.BaseLoggedActivity;
 import com.example.bbreda.cardmanager.presentation.home.HomeActivity;
 
 import java.util.List;
@@ -31,13 +29,17 @@ public class MyCardsFragment extends Fragment implements MyCardsContract.View {
     @BindView(R.id.recycler_view_cards)
     RecyclerView mMyCards;
 
-    ProgressDialog progressDoalog;
+    ProgressDialog mProgress;
 
     private MyCardsContract.Presenter mPresenter;
 
-    public static MyCardsFragment newInstance() { return new MyCardsFragment(); }
+    public static MyCardsFragment newInstance() {
+        return new MyCardsFragment();
+    }
 
-    public void setPresenter(MyCardsContract.Presenter presenter) { mPresenter = presenter; }
+    public void setPresenter(MyCardsContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
 
     private CardItemListener mMyCardsListener = new CardItemListener() {
         @Override
@@ -54,20 +56,13 @@ public class MyCardsFragment extends Fragment implements MyCardsContract.View {
         ButterKnife.bind(this, view);
 
         return  view;
-
     }
 
     @Override
-    public Context getViewContext() { return getContext(); }
-
-    @Override
     public void showCards(List<Card> cardList) {
-
         MyCardsAdapter myCardsAdapter = new MyCardsAdapter(cardList, mMyCardsListener);
-
         mMyCards.setAdapter(myCardsAdapter);
         mMyCards.setLayoutManager(new LinearLayoutManager(getContext()));
-
     }
 
     @Override
@@ -78,21 +73,21 @@ public class MyCardsFragment extends Fragment implements MyCardsContract.View {
 
     @Override
     public void showLoading() {
-        progressDoalog = new ProgressDialog(getViewContext());
-        progressDoalog.setMax(100);
-        progressDoalog.setMessage("Verificando seus cartões, aguarde por favor...");
-        progressDoalog.setTitle("CardManager");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDoalog.show();
+        mProgress = new ProgressDialog(getViewContext());
+        mProgress.setMax(100);
+        mProgress.setMessage("Verificando seus cartões, aguarde por favor...");
+        mProgress.setTitle("CardManager");
+        mProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgress.show();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    while (progressDoalog.getProgress() <= progressDoalog.getMax()) {
+                    while (mProgress.getProgress() <= mProgress.getMax()) {
                         Thread.sleep(200);
                         handle.sendMessage(handle.obtainMessage());
-                        if (progressDoalog.getProgress() == progressDoalog.getMax()) {
+                        if (mProgress.getProgress() == mProgress.getMax()) {
                             hideLoading();
                         }
                     }
@@ -107,14 +102,18 @@ public class MyCardsFragment extends Fragment implements MyCardsContract.View {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            progressDoalog.incrementProgressBy(15);
+            mProgress.incrementProgressBy(15);
         };
     };
 
     @Override
-    public void hideLoading() {
-        progressDoalog.dismiss();
+    public Context getViewContext() {
+        return getContext();
+    }
 
+    @Override
+    public void hideLoading() {
+        mProgress.dismiss();
     }
 
     @Override
@@ -122,7 +121,6 @@ public class MyCardsFragment extends Fragment implements MyCardsContract.View {
         showLoading();
         super.onStart();
         mPresenter.start();
-
     }
 
     public interface CardItemListener {

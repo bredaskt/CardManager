@@ -30,15 +30,11 @@ import com.example.bbreda.cardmanager.presentation.carddetails.CardDetailsActivi
 import com.example.bbreda.cardmanager.presentation.mycards.MyCardsActivity;
 import com.example.bbreda.cardmanager.presentation.schedulepayment.SchedulePaymentActivity;
 
-public abstract class BaseLoggedActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BaseLoggedContract.View {
+public abstract class BaseLoggedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BaseLoggedContract.View {
 
     private TextView mNameFromSharedPreferences;
-
     private BaseLoggedContract.Presenter mPresenter;
-
     private ContentFrameLayout mViewStub;
-
     private ActionBarDrawerToggle toggle;
 
     @Override
@@ -62,31 +58,26 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
         mNameFromSharedPreferences = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_name_sharedPreferences);
 
         mPresenter = new BaseLoggedPresenter(this);
-
     }
 
     public void goToCardDetails() {
         startActivity(new Intent(this, CardDetailsActivity.class));
         finish();
-
     }
 
     public void goToMyCards() {
         startActivity(new Intent(this, MyCardsActivity.class));
         finish();
-
     }
 
     public void goToSchedulePayment() {
         startActivity(new Intent(this, SchedulePaymentActivity.class));
         finish();
-
     }
 
     public void goToAbout() {
         startActivity(new Intent(this, AboutActivity.class));
         finish();
-
     }
 
     @Override
@@ -108,7 +99,6 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
-
     }
 
     @Override
@@ -119,7 +109,6 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-
     }
 
     @Override
@@ -127,7 +116,6 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.drawer_menu, menu);
 
         return true;
-
     }
 
     @Override
@@ -137,7 +125,6 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
@@ -145,7 +132,6 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
         if (mViewStub != null) {
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             mViewStub.addView(view, lp);
-
         }
     }
 
@@ -188,16 +174,12 @@ public abstract class BaseLoggedActivity extends AppCompatActivity
 
     @Override
     public void showDataUser(User user) {
-
         mNameFromSharedPreferences.setText(user.getName());
-
     }
 
     @Override
     public void setPresenter(Presenter presenter) {
-
         mPresenter = presenter;
-
     }
 
     @Override

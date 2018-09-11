@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
-        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardBackgroundColor="@color/colorWhite"
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true">
 
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
-        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardBackgroundColor="@color/colorWhite"
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true">
 
@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
-        card_view:cardBackgroundColor="#ffffff"
+        card_view:cardBackgroundColor="@color/colorWhite"
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true">
 

@@ -3,7 +3,6 @@ package com.example.bbreda.cardmanager.presentation.about;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,10 +36,7 @@ public class AboutFragment extends Fragment implements AboutContract.View {
     public void goToAboutScreen() {
         startActivity(new Intent(getContext(), AboutActivity.class));
         getActivity().finish();
-
-        // TODO
         Toast.makeText(getViewContext(), "Implementar a abertura da tela de sobre!!!!!", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -50,7 +46,5 @@ public class AboutFragment extends Fragment implements AboutContract.View {
     public Context getViewContext() {
         return getContext();
     }
-
-
 
 }

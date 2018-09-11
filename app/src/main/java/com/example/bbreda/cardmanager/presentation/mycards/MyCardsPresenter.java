@@ -64,10 +64,7 @@ public class MyCardsPresenter implements MyCardsContract.Presenter {
 
     @Override
     public void start() {
-        // TODO
-
         mLoginBusiness.getCard(operationListenerCardList);
-
     }
 
     @Override

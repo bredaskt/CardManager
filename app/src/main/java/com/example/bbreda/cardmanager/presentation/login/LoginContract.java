@@ -19,6 +19,8 @@ public interface LoginContract {
 
         void hideLoading();
 
+        void showMessageErrorFilledFormPasswordGeneric();
+
     }
 
     interface Presenter extends BasePresenter {
